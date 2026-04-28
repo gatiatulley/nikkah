@@ -6,39 +6,112 @@
 
 <title>Али & Лейсан — Никах</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --bg:#fbf7f2;
-  --card:rgba(255,255,255,0.75);
+  --gold:#b89b6a;
   --text:#5d4b3d;
   --soft:#8b7765;
-  --gold:#b89b6a;
-  --border:rgba(184,155,106,0.18);
+  --bg1:#fbf7f2;
+  --bg2:#f3eadf;
 }
 
+/* ===== BASE ===== */
 *{margin:0;padding:0;box-sizing:border-box;}
 
 body{
   font-family:Montserrat,sans-serif;
-  background:linear-gradient(180deg,#fffaf2,#f6efe6);
   color:var(--text);
+  background:linear-gradient(180deg,var(--bg1),var(--bg2));
   overflow-x:hidden;
+  position:relative;
 }
 
+/* ===== BASHKIR PATTERN BACKGROUND ===== */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  opacity:0.05;
+  pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cpath d='M60 10 L90 40 L60 70 L30 40 Z' fill='none' stroke='%23b89b6a' stroke-width='1'/%3E%3Cpath d='M60 40 L80 60 L60 80 L40 60 Z' fill='none' stroke='%23b89b6a' stroke-width='1'/%3E%3C/svg%3E");
+  background-size:140px 140px;
+}
+
+/* ===== ORNAMENT FRAME ===== */
+.ornament{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* top & bottom ornamental lines */
+.ornament::before,
+.ornament::after{
+  content:"";
+  position:absolute;
+  left:0;
+  width:100%;
+  height:80px;
+  opacity:0.18;
+  background-repeat:repeat-x;
+  background-size:contain;
+  animation:flow 60s linear infinite;
+}
+
+/* top */
+.ornament::before{
+  top:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='80'%3E%3Cpath d='M0 40 Q50 0 100 40 T200 40 T300 40 T400 40 T500 40 T600 40 T700 40 T800 40' stroke='%23b89b6a' fill='none'/%3E%3C/svg%3E");
+}
+
+/* bottom */
+.ornament::after{
+  bottom:0;
+  transform:scaleY(-1);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='80'%3E%3Cpath d='M0 40 Q50 0 100 40 T200 40 T300 40 T400 40 T500 40 T600 40 T700 40 T800 40' stroke='%23b89b6a' fill='none'/%3E%3C/svg%3E");
+}
+
+/* side columns (manuscript feel) */
+.side-orn{
+  position:fixed;
+  top:0;
+  bottom:0;
+  width:60px;
+  opacity:0.12;
+  background-repeat:repeat-y;
+  background-size:contain;
+  z-index:0;
+}
+
+.side-left{
+  left:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='300'%3E%3Cpath d='M30 0 L50 30 L30 60 L10 30 Z' fill='none' stroke='%23b89b6a'/%3E%3C/svg%3E");
+  animation:floatY 90s linear infinite;
+}
+
+.side-right{
+  right:0;
+  transform:scaleX(-1);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='300'%3E%3Cpath d='M30 0 L50 30 L30 60 L10 30 Z' fill='none' stroke='%23b89b6a'/%3E%3C/svg%3E");
+  animation:floatY 110s linear infinite reverse;
+}
+
+/* ===== LAYOUT ===== */
 .container{
   width:min(1050px,92%);
   margin:auto;
+  position:relative;
+  z-index:2;
 }
 
 section{
   padding:90px 0;
 }
 
-/* HERO */
+/* ===== HERO ===== */
 .hero{
   min-height:100vh;
   display:flex;
@@ -49,65 +122,49 @@ section{
 
 .hero h1{
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(52px,8vw,110px);
-  letter-spacing:1px;
+  font-size:clamp(50px,8vw,110px);
+  animation:fadeUp 1.5s ease;
 }
 
-.date{
-  margin-top:18px;
-  font-size:22px;
-  color:var(--soft);
-}
-
-/* CARD */
+/* ===== CARD ===== */
 .card{
-  background:var(--card);
-  backdrop-filter:blur(14px);
-  border:1px solid var(--border);
+  background:rgba(255,255,255,0.75);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(184,155,106,0.2);
   border-radius:28px;
-  padding:42px;
-  box-shadow:0 20px 60px rgba(0,0,0,0.06);
-  transition:.4s ease;
+  padding:40px;
+  box-shadow:0 30px 80px rgba(0,0,0,0.06);
+  transition:.5s ease;
 }
 
 .card:hover{
-  transform:translateY(-4px);
-  box-shadow:0 30px 80px rgba(0,0,0,0.08);
+  transform:translateY(-6px);
 }
 
-/* TIMER */
+/* ===== TIMER ===== */
 .timer{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
-  gap:18px;
-  margin-top:35px;
+  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+  gap:16px;
+  margin-top:30px;
 }
 
 .timer-box{
+  padding:20px;
   background:rgba(255,255,255,0.8);
-  border-radius:22px;
-  padding:22px;
+  border-radius:18px;
 }
 
 .timer-box span{
-  font-family:'Cormorant Garamond',serif;
   font-size:40px;
+  font-family:'Cormorant Garamond';
   color:var(--gold);
-  display:block;
 }
 
-/* TITLE */
-h2{
-  font-family:'Cormorant Garamond',serif;
-  font-size:44px;
-  margin-bottom:18px;
-  text-align:center;
-}
-
-/* SCHEDULE */
+/* ===== SCHEDULE ===== */
 .schedule{
   display:grid;
-  gap:18px;
+  gap:16px;
 }
 
 .schedule-item{
@@ -117,82 +174,51 @@ h2{
   border-radius:14px;
 }
 
-.schedule-item h3{
-  font-size:26px;
-  margin-bottom:4px;
-}
-
-/* DRESS */
-.dress-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:26px;
-  margin-top:18px;
-}
-
-.dress-text{
-  color:var(--soft);
-  margin-top:6px;
-  line-height:1.7;
-}
-
-.dress-divider{
-  height:1px;
-  background:var(--border);
-  margin:16px 0;
-}
-
-/* MAP */
-iframe{
-  width:100%;
-  height:420px;
-  border:none;
-  border-radius:24px;
-  margin-top:24px;
-}
-
-/* FOOTER */
-.footer{
-  text-align:center;
-  padding:100px 0;
-}
-
-.rsvp{
-  display:inline-block;
-  margin-top:26px;
-  padding:14px 32px;
-  border-radius:999px;
-  background:var(--gold);
-  color:#fff;
-  text-decoration:none;
-}
-
 /* ===== ANIMATIONS ===== */
 .reveal{
   opacity:0;
-  transform:translateY(24px);
-  transition:all 1s cubic-bezier(.2,.8,.2,1);
+  transform:translateY(30px);
+  transition:1s cubic-bezier(.2,.8,.2,1);
 }
 
 .reveal.show{
   opacity:1;
   transform:translateY(0);
 }
+
+@keyframes flow{
+  0%{transform:translateX(0);}
+  100%{transform:translateX(-200px);}
+}
+
+@keyframes floatY{
+  0%{transform:translateY(0);}
+  100%{transform:translateY(-400px);}
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px);}
+  to{opacity:1;transform:translateY(0);}
+}
 </style>
 </head>
 
 <body>
 
+<div class="ornament"></div>
+<div class="side-orn side-left"></div>
+<div class="side-orn side-right"></div>
+
 <section class="hero reveal">
   <div class="container">
     <h1>Али & Лейсан</h1>
-    <div class="date">9 августа 2026 • 13:00</div>
   </div>
 </section>
 
 <section class="reveal">
   <div class="container">
     <div class="card">
-      <h2>До никаха осталось</h2>
+      <h2>До никаха</h2>
       <div class="timer" id="timer"></div>
     </div>
   </div>
@@ -204,108 +230,48 @@ iframe{
       <h2>Программа дня</h2>
 
       <div class="schedule">
-
         <div class="schedule-item">
           <h3>14:00 — Никах</h3>
           <p>Мечеть</p>
         </div>
 
         <div class="schedule-item">
-          <h3>15:00 — Welcome-зона и фуршет</h3>
-          <p>Банкетный зал</p>
+          <h3>15:00 — Welcome-зона</h3>
+          <p>Фуршет в банкетном зале</p>
         </div>
 
         <div class="schedule-item">
           <h3>15:30 — Банкет</h3>
           <p>Банкетный зал</p>
         </div>
-
       </div>
 
-      <h2 style="margin-top:40px;">Локации</h2>
-
-      <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A1f261cb09e038d5c6bee1c49ec5485177f3ad43a4e426fd3060439c6a79b5e41"></iframe>
-
     </div>
-  </div>
-</section>
-
-<section class="reveal">
-  <div class="container">
-    <div class="card">
-
-      <h2>Dress Code</h2>
-
-      <p class="dress-title">Общий стиль</p>
-      <p class="dress-text">
-        Мы будем рады видеть вас в нарядной одежде светлых, спокойных оттенков.
-      </p>
-
-      <div class="dress-divider"></div>
-
-      <p class="dress-title">Церемония</p>
-      <p class="dress-text">
-        Сдержанный и элегантный образ, прикрытые плечи, руки и ноги.
-      </p>
-
-      <p class="dress-text">
-        Для девушек будут предоставлены платки.
-      </p>
-
-      <div class="dress-divider"></div>
-
-      <p class="dress-title">Банкет</p>
-      <p class="dress-text">
-        Более свободный, но эстетичный и светлый стиль.
-      </p>
-
-    </div>
-  </div>
-</section>
-
-<section class="footer reveal">
-  <div class="container">
-    <h2>Будем рады видеть вас</h2>
-    <a class="rsvp" href="#">Подтвердить присутствие</a>
   </div>
 </section>
 
 <script>
 /* TIMER */
-const weddingDate = new Date("2026-08-09T13:00:00").getTime();
-const timer = document.getElementById("timer");
+const date = new Date("2026-08-09T13:00:00").getTime();
+const el = document.getElementById("timer");
 
-function updateTimer(){
-  const now = Date.now();
-  const diff = weddingDate - now;
+setInterval(()=>{
+  const d = date - Date.now();
 
-  const d = Math.floor(diff/86400000);
-  const h = Math.floor(diff/3600000%24);
-  const m = Math.floor(diff/60000%60);
-  const s = Math.floor(diff/1000%60);
-
-  timer.innerHTML = `
-    <div class="timer-box"><span>${d}</span>дней</div>
-    <div class="timer-box"><span>${h}</span>часов</div>
-    <div class="timer-box"><span>${m}</span>минут</div>
-    <div class="timer-box"><span>${s}</span>секунд</div>
+  el.innerHTML = `
+    <div class="timer-box"><span>${Math.floor(d/86400000)}</span>дней</div>
+    <div class="timer-box"><span>${Math.floor(d/3600000%24)}</span>часов</div>
+    <div class="timer-box"><span>${Math.floor(d/60000%60)}</span>минут</div>
+    <div class="timer-box"><span>${Math.floor(d/1000%60)}</span>сек</div>
   `;
-}
-setInterval(updateTimer,1000);
-updateTimer();
+},1000);
 
-/* SCROLL REVEAL */
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.classList.add("show");
-    }
-  });
-},{threshold:0.15});
+/* SCROLL */
+const obs=new IntersectionObserver(e=>{
+  e.forEach(i=>i.isIntersecting&&i.target.classList.add("show"));
+},{threshold:.15});
 
-document.querySelectorAll(".reveal").forEach(el=>{
-  observer.observe(el);
-});
+document.querySelectorAll(".reveal").forEach(e=>obs.observe(e));
 </script>
 
 </body>
